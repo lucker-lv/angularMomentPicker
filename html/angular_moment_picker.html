@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="../Content/bootstrap.min.css">
+	<link rel="stylesheet" href="../Content/angular-moment-picker.min.css">
+	<script src='../Scripts/angular.min.js'></script>
+	<script src='../Scripts/moment.min.js'></script>
+	<script src='../Scripts/locale_zh-cn.js'></script>
+	<script src='../Scripts/angular-moment-picker.js'></script>
+</head>
+<body ng-app='myApp' ng-controller='myCtrl'>
+	<div class="form-inline">
+		<div class='input-group' moment-picker="ctrl.datepicker" format='YYYY-MM-DD'>
+			<input class="form-control" placeholder="请选择日期" ng-model="ctrl.datepicker" ng-model-options="{ updateOn: 'blur' }" max-date="ctrl.datepicker2">
+			<span class="input-group-addon">
+				<i class="glyphicon glyphicon-calendar"></i>
+			</span>
+		</div>
+		<div class='input-group' moment-picker="ctrl.datepicker2" format='YYYY-MM-DD' min-date='ctrl.datepicker'>
+			<input class="form-control" placeholder="请选择日期" ng-model="ctrl.datepicker2" ng-model-options="{ updateOn: 'blur' }">
+			<span class="input-group-addon">
+				<i class="glyphicon glyphicon-calendar"></i>
+			</span>
+		</div>
+	</div>
+
+	<script>
+		var myApp = angular.module('myApp', ['moment-picker'])
+			.config(['momentPickerProvider', function (momentPickerProvider) {
+		        momentPickerProvider.options({
+		            /* Picker properties */
+		            locale:        'zh-cn',
+		            format:        'L LTS',
+		            minView:       'decade',
+		            maxView:       'minute',
+		            startView:     'month',
+		            autoclose:     true,
+		            today:         true,
+		            keyboard:      false,
+		            
+		            /* Extra: Views properties */
+		            leftArrow:     '&larr;',
+		            rightArrow:    '&rarr;',
+		            yearsFormat:   'YYYY',
+		            monthsFormat:  'MMM',
+		            daysFormat:    'D',
+		            hoursFormat:   'HH:[00]',
+		            minutesFormat: moment.localeData().longDateFormat('LT').replace(/[aA]/, ''),
+		            secondsFormat: 'ss',
+		            minutesStep:   5,
+		            secondsStep:   1
+		        });
+		    }])
+		    .controller('myCtrl', function($scope){
+
+
+		  //   	ctrl.isSelectable = function (date, type) {
+				//     // disable all Sundays in the Month View
+				//     return type != 'day' || date.format('dddd') != 'Sunday';
+				// };
+		    })
+	</script>
+</body>
+</html>
